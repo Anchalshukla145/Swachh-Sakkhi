@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Location Tracking</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; }
+        #map { width: 100%; height: 500px; margin-top: 10px; }
+        #status { margin: 10px; font-size: 18px; font-weight: bold; }
+        select { padding: 5px; font-size: 16px; margin: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Live Location Tracking </h1>
+    <p id="status">Fetching location...</p>
+
+    <label for="state">Select State:</label>
+    <select id="state">
+        <option value="">--Select State--</option>
+    </select>
+
+    <label for="city">Select City:</label>
+    <select id="city">
+        <option value="">--Select City--</option>
+    </select>
+
+    <div id="map"></div>
+
+    <script>
+        let map = L.map('map').setView([20.5937, 78.9629], 5); // Default to India
+
+        // Load OpenStreetMap Tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        let marker = L.marker([20.5937, 78.9629]).addTo(map);
+
+        // State and City Data
+        const statesAndCities = {
+            "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore"],
+            "Arunachal Pradesh": ["Itanagar", "Tawang", "Ziro", "Bomdila"],
+            "Assam": ["Guwahati", "Dibrugarh", "Jorhat", "Silchar"],
+            "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur"],
+            "Chhattisgarh": ["Raipur", "Bhilai", "Durg", "Bilaspur"],
+            "Goa": ["Panaji", "Vasco da Gama", "Margao", "Mapusa"],
+            "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
+            "Haryana": ["Chandigarh", "Gurgaon", "Faridabad", "Panipat"],
+            "Himachal Pradesh": ["Shimla", "Manali", "Dharamshala", "Solan"],
+            "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro"],
+            "Karnataka": ["Bengaluru", "Mysuru", "Mangalore", "Hubli"],
+            "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur"],
+            "Madhya Pradesh": ["Bhopal", "Indore", "Gwalior", "Jabalpur"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik"],
+            "Manipur": ["Imphal", "Bishnupur", "Churachandpur", "Thoubal"],
+            "Meghalaya": ["Shillong", "Tura", "Jowai", "Nongstoin"],
+            "Mizoram": ["Aizawl", "Lunglei", "Champhai", "Kolasib"],
+            "Nagaland": ["Kohima", "Dimapur", "Mokokchung", "Tuensang"],
+            "Odisha": ["Bhubaneswar", "Cuttack", "Puri", "Rourkela"],
+            "Punjab": ["Chandigarh", "Amritsar", "Ludhiana", "Jalandhar"],
+            "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Ajmer"],
+            "Sikkim": ["Gangtok", "Namchi", "Gyalshing", "Mangan"],
+            "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli"],
+            "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar"],
+            "Tripura": ["Agartala", "Udaipur", "Dharmanagar", "Ambassa"],
+            "Uttar Pradesh": ["Lucknow", "Kanpur", "Varanasi", "Agra"],
+            "Uttarakhand": ["Dehradun", "Haridwar", "Nainital", "Rishikesh"],
+            "West Bengal": ["Kolkata", "Darjeeling", "Asansol", "Durgapur"]
+        };
+
+        // Populate State Dropdown
+        const stateSelect = document.getElementById("state");
+        const citySelect = document.getElementById("city");
+
+        for (let state in statesAndCities) {
+            let option = document.createElement("option");
+            option.value = state;
+            option.textContent = state;
+            stateSelect.appendChild(option);
+        }
+
+        // Populate City Dropdown Based on Selected State
+        stateSelect.addEventListener("change", function () {
+            citySelect.innerHTML = '<option value="">--Select City--</option>';
+            let selectedState = this.value;
+
+            if (selectedState && statesAndCities[selectedState]) {
+                statesAndCities[selectedState].forEach(city => {
+                    let option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        });
+
+        // Move Marker When City is Selected
+        citySelect.addEventListener("change", function () {
+            let selectedCity = this.value;
+            let selectedState = stateSelect.value;
+
+            if (selectedCity && statesAndCities[selectedState]) {
+                fetch(`https://nominatim.openstreetmap.org/search?city=${selectedCity}&country=India&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            let lat = data[0].lat;
+                            let lon = data[0].lon;
+                            marker.setLatLng([lat, lon]);
+                            map.setView([lat, lon], 12);
+                            document.getElementById("status").innerText = `Selected Location: ${selectedCity}, ${selectedState}`;
+                        }
+                    })
+                    .catch(error => console.error("Error fetching location:", error));
+            }
+        });
+
+        // Live Location Tracking
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    marker.setLatLng([lat, lng]);
+                    map.setView([lat, lng], 15);
+
+                    document.getElementById("status").innerText = `Live Location: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+                },
+                (error) => {
+                    document.getElementById("status").innerText = "Error fetching location!";
+                    console.error(error);
+                },
+                { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
+            );
+        } else {
+            document.getElementById("status").innerText = "Geolocation is not supported by your browser.";
+        }
+    </script>
+
+</body>
+</html>

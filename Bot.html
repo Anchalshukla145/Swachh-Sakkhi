@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoBot - Municipal Corporation & Waste Management Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url(BGBot.webp);
+            background-size: cover;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: rgba(248, 242, 242, 0.604);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow-y: auto;
+            height: 400px;
+        }
+        .bot-response {
+            background-color: #e2f7e1;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 5px solid #4CAF50;
+        }
+        .user-input {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .user-input input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .user-input button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .user-input button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div id="chatbox"></div>
+    <div class="user-input">
+        <input type="text" id="userInput" placeholder="Enter your question...">
+        <button onclick="getBotResponse()">Send</button>
+    </div>
+</div>
+
+<script>
+    let questionCount = 0;
+    function getBotResponse() {
+        const userInput = document.getElementById("userInput").value.toLowerCase();
+        const chatBox = document.getElementById("chatbox");
+        let botResponse = "";
+
+        questionCount++;
+
+        // Municipal Corporation Information
+        
+     if (userInput.includes("delhi")) {
+    botResponse = "🗨️ Here are the municipal corporations in Delhi:<br>New Delhi Municipal Council - 011-23344177<br>East Delhi Municipal Corporation - 011-66660760<br>North Delhi Municipal Corporation - 011-22755454<br>South Delhi Municipal Corporation - 011-26825133";
+} else if (userInput.includes("maharashtra")) {
+    botResponse = "🗨️ Here are the municipal corporations in Maharashtra:<br>Mumbai Municipal Corporation - 022-22617900<br>Pune Municipal Corporation - 020-26124534";
+} else if (userInput.includes("karnataka")) {
+    botResponse = "🗨️ Here are the municipal corporations in Karnataka:<br>Bangalore Municipal Corporation - 080-22864044<br>Mysore Municipal Corporation - 0821-2420213";
+} else if (userInput.includes("tamilnadu")) {
+    botResponse = "🗨️ Here is the municipal corporation in Tamil Nadu:<br>Chennai Corporation - 044-25619270";
+} else if (userInput.includes("punjab")) {
+    botResponse = "🗨️ Here is the municipal corporation in Punjab:<br>Ludhiana Municipal Corporation - 0161-2301740";
+} else if (userInput.includes("uttarpradesh")) {
+    botResponse = "🗨️ Here is the municipal corporation in Uttar Pradesh:<br>Lucknow Municipal Corporation - 0522-2235244";
+} else if (userInput.includes("westbengal")) {
+    botResponse = "🗨️ Here is the municipal corporation in West Bengal:<br>Kolkata Municipal Corporation - 033-2286-5459";
+} else if (userInput.includes("bihar")) {
+    botResponse = "🗨️ Here is the municipal corporation in Bihar:<br>Patna Municipal Corporation - 0612-2676040";
+} else if (userInput.includes("kerala")) {
+    botResponse = "🗨️ Here are the municipal corporations in Kerala:<br>Thiruvananthapuram Municipal Corporation - 0471-2471412<br>Kochi Municipal Corporation - 0484-2394080";
+} else if (userInput.includes("rajasthan")) {
+    botResponse = "🗨️ Here is the municipal corporation in Rajasthan:<br>Jaipur Municipal Corporation - 0141-2522165";
+} else if (userInput.includes("andhrapradesh")) {
+    botResponse = "🗨️ Here is the municipal corporation in Andhra Pradesh:<br>Visakhapatnam Municipal Corporation - 0891-2550222";
+} else if (userInput.includes("telangana")) {
+    botResponse = "🗨️ Here is the municipal corporation in Telangana:<br>Hyderabad Municipal Corporation - 040-27121233";
+} else if (userInput.includes("haryana")) {
+    botResponse = "🗨️ Here are the municipal corporations in Haryana:<br>Faridabad Municipal Corporation - 0129-2410277<br>Gurugram Municipal Corporation - 0124-2207065";
+} else if (userInput.includes("himachalpradesh")) {
+    botResponse = "🗨️ Here is the municipal corporation in Himachal Pradesh:<br>Shimla Municipal Corporation - 0177-2652201";
+} else if (userInput.includes("jharkhand")) {
+    botResponse = "🗨️ Here is the municipal corporation in Jharkhand:<br>Ranchi Municipal Corporation - 0651-2364705";
+} else if (userInput.includes("odisha")) {
+    botResponse = "🗨️ Here is the municipal corporation in Odisha:<br>Bhubaneswar Municipal Corporation - 0674-2530617";
+} else if (userInput.includes("chhattisgarh")) {
+    botResponse = "🗨️ Here is the municipal corporation in Chhattisgarh:<br>Raipur Municipal Corporation - 0771-2525222";
+} else if (userInput.includes("assam")) {
+    botResponse = "🗨️ Here is the municipal corporation in Assam:<br>Guwahati Municipal Corporation - 0361-2600780";
+} else if (userInput.includes("goa")) {
+    botResponse = "🗨️ Here is the municipal corporation in Goa:<br>Panaji Municipal Corporation - 0832-2223289";
+} else if (userInput.includes("jammuandkashmir")) {
+    botResponse = "🗨️ Here is the municipal corporation in Jammu and Kashmir:<br>Srinagar Municipal Corporation - 0194-2450420";
+} else if (userInput.includes("ladakh")) {
+    botResponse = "🗨️ Here is the municipal corporation in Ladakh:<br>Leh Municipal Corporation - 01982-252106";
+} else if (userInput.includes("chandigarh")) {
+    botResponse = "🗨️ Here is the municipal corporation in Chandigarh:<br>Chandigarh Municipal Corporation - 0172-2700300";
+} else if (userInput.includes("andamanandnicobar")) {
+    botResponse = "🗨️ Here is the municipal corporation in Andaman and Nicobar:<br>Port Blair Municipal Corporation - 03192-232078";
+} else if (userInput.includes("dadarandnagarhaveli")) {
+    botResponse = "🗨️ Here is the municipal corporation in Dadra and Nagar Haveli:<br>Dadra Municipal Corporation - 0260-2640025";
+} else if (userInput.includes("lakshadweep")) {
+    botResponse = "🗨️ Here is the municipal corporation in Lakshadweep:<br>Kavaratti Municipal Corporation - 04896-262338";
+} else if (userInput.includes("puducherry")) {
+    botResponse = "🗨️ Here is the municipal corporation in Puducherry:<br>Puducherry Municipal Corporation - 0413-2332500";
+}
+else if (userInput.includes("hello") || userInput.includes("hi") || userInput.includes("hey")) {
+            botResponse = "🗨️ Hi there! How can I assist you today with waste management or municipal corporation information?";
+        } 
+        // Request for report or "I found" and ask to specify the state
+else if (userInput.includes("report") || userInput.includes("i found")) {
+            botResponse = "🗨️ Please specify the state so I can help you with the municipal corporation details for that area.";
+        }
+        // Add other states here as needed
+
+        // Waste Management and Other Queries
+        else if (userInput.includes("upload an image of a garbage hotspot")) {
+            botResponse = "🗨️ Yes! You can upload a geotagged image through our website’s ‘Report Garbage’ section. This helps in tracking waste more efficiently.";
+        } 
+        else if (userInput.includes("earn eco-points")) {
+            botResponse = "🗨️ You earn eco-points every time you report a garbage hotspot, illegal dumping, or dead animal. Each valid report earns you 10 eco-points!";
+        } 
+        else if (userInput.includes("what can I do with my eco-points")) {
+            botResponse = "🗨️ Your eco-points can be redeemed for discounts, rewards, or participation in green initiatives. Stay tuned for more exciting offers!";
+        } 
+        else if (userInput.includes("track my previously reported garbage issues")) {
+            botResponse = "🗨️ You can track your reports under the ‘My Reports’ section on our website. Updates will be provided once the issue is resolved.";
+        } 
+        else if (userInput.includes("what happens after I report garbage")) {
+            botResponse = "🗨️ Once you report, our system forwards the details to local municipal authorities or community clean-up teams for quick action.";
+        } 
+        else if (userInput.includes("participate in local clean-up drives")) {
+            botResponse = "🗨️ You can join clean-up events in your area by checking our ‘Upcoming Events’ section. Volunteering also earns you extra eco-points!";
+        } 
+        else if (userInput.includes("suggest ways to reduce waste at home")) {
+            botResponse = "🗨️ Yes! You can reduce waste by composting food scraps, using reusable bags, recycling properly, and avoiding single-use plastics.";
+        } 
+        else if (userInput.includes("how does waste segregation help the environment")) {
+            botResponse = "🗨️ Segregating waste makes recycling easier, reduces landfill waste, and prevents harmful pollutants from entering our ecosystem.";
+        } 
+        else if (userInput.includes("anything else I can help you with")) {
+            botResponse = "🗨️ I’m here to assist! Feel free to ask about recycling tips, garbage tracking, or eco-friendly practices.";
+        } 
+        else if (userInput.includes("learn more about how you can contribute to a cleaner environment")) {
+            botResponse = "🗨️ Absolutely! Small actions like proper waste disposal, reducing plastic use, and reporting garbage can make a big difference.";
+        } 
+        else if (userInput.includes("stay updated on upcoming sustainability events or clean-up drives")) {
+            botResponse = "🗨️ You can subscribe to our newsletter or check the ‘Events’ section on our website for the latest updates!";
+        } 
+        else if (userInput.includes("check your eco-points balance or redeem them")) {
+            botResponse = "🗨️ You can view your eco-points in the ‘My Account’ section. Redeem them for discounts, rewards, or green initiatives!";
+        } 
+        else if (userInput.includes("feedback to improve my service")) {
+            botResponse = "🗨️ Your feedback helps me serve you better! Let me know how I can improve or add more helpful features.";
+        } 
+        else {
+            botResponse = "🗨️ I can help with waste tracking and sustainability. Try asking about reporting garbage or locating municipal offices.";
+        }
+
+        // End chat after 5 questions
+        if (questionCount >= 5) {
+            botResponse += " 🗨️ Thank you for chatting! If you have no more questions, have a great day!";
+            questionCount = 0; // Reset question count for the next user
+        }
+
+        // Ask if the user would like to know more and listen for a negative response
+        if (userInput.includes("no")) {
+            botResponse = "🗨️ Thank you for your time! If you have any other questions in the future, don't hesitate to ask.";
+            questionCount = 0; // Reset question count at the end of the conversation
+        }
+
+        // Add the bot's response to the chat box
+        chatBox.innerHTML += `<p class="bot-response"><b>EcoBot:</b> ${botResponse}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Clear the input field
+        document.getElementById("userInput").value = "";
+    }
+</script>
+
+</body>
+</html>

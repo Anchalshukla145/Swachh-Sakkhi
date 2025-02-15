@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garbage Collection</title>
+    <link rel="stylesheet" href="Geotag.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Geotagged Image</h2>
+        <input type="file" id="imageInput" accept="image/*">
+        <button onclick="uploadImage()">Upload</button>
+        <p id="status"></p>
+        <p id="ecoPointsMessage"></p>
+    </div>
+
+    <script>
+        function uploadImage() {
+            const fileInput = document.getElementById('imageInput');
+            if (!fileInput.files.length) {
+                alert("Please select an image");
+                return;
+            }
+
+            // Simulate successful upload
+            document.getElementById('status').innerText = "Upload Successful! ✅";
+            alert("Image uploaded successfully!");
+
+            // Increase eco-points
+            let ecoPoints = localStorage.getItem("ecoPoints") ? parseInt(localStorage.getItem("ecoPoints")) : 0;
+            ecoPoints += 10; // Increase by 10 points per upload
+            localStorage.setItem("ecoPoints", ecoPoints);
+
+            document.getElementById('ecoPointsMessage').innerText = `Eco Points: ${ecoPoints}`;
+
+            // Update the leaderboard after upload
+            updateLeaderboard();
+        }
+
+        // Display eco points on page load
+        window.onload = function() {
+            let ecoPoints = localStorage.getItem("ecoPoints") ? parseInt(localStorage.getItem("ecoPoints")) : 0;
+            document.getElementById('ecoPointsMessage').innerText = `Eco Points: ${ecoPoints}`;
+        };
+
+        function updateLeaderboard() {
+            localStorage.setItem("leaderboardUpdated", "true");
+        }
+    </script>
+</body>
+</html>

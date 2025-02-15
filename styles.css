@@ -1,0 +1,46 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(43f23554-9e4b-448c-8997-149996354a0b.jpg) no-repeat center center/cover;
+    /* background-color: #FBDA61;
+    background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%); */
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container{
+    margin: 20px 64px;
+    padding: 37px 111px;
+    position: absolute;
+    border: 2px dashed black;
+    width: 80vw;
+    text-align: center;
+    /* background: url(./img.jpg) no-repeat center center/cover; background: url('./img.jpg') no-repeat center center/cover; */
+    
+}
+
+#city{
+    font-size: 2rem;
+    font-weight: 800;
+}
+#temperature{
+    font-size: 2rem;
+    font-weight: 800;
+}
+#humidity{
+    font-size: 2rem;
+    font-weight: 800;
+}
+#wind{
+    font-size: 2rem;
+    font-weight: 800;
+}
+#prescription{
+    font-size: 2rem;
+    font-weight: 800;
+}
+#prescription1{
+    font-size: 2rem;
+    font-weight: 800;
+}
+

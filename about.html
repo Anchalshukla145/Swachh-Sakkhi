@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* Smooth gradient background */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #3a7bd5, #3a6073);
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section styling */
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        /* Leader section using Grid */
+        .leaders {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .leader {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .leader:hover {
+            transform: scale(1.05);
+        }
+
+        /* Image Styling */
+        .leader img {
+            width: 80px; /* Adjust image size */
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <section class="section" id="campaign">
+            <h2>About Our Campaign</h2>
+            <p>Our mission is to create awareness and reduce garbage through community involvement and data-driven decisions.</p>
+        </section>
+
+        <section class="section" id="leaders">
+            <h2>Our Experts</h2>
+            <div class="leaders">
+                <div class="leader">
+                    <img src="Shruti.jpg" alt="Shruti">
+                    <h3>Shruti Somvanshi</h3>
+                    <p>AI Expert</p>
+                </div>
+                <div class="leader">
+                    <img src="Anchal.jpg" alt="Anchal">
+                    <h3>Anchal Shukla</h3>
+                    <p>Team Leader</p>
+                </div>
+                <div class="leader">
+                    <img src="IMG_20240729_215342_044.jpg" alt="Aditya">
+                    <h3>Aditya Kumar Singh</h3>
+                    <p>Cloud Architect</p>
+                </div>
+                <div class="leader">
+                    <img src="Sarthak.jpg" alt="Sarthak">
+                    <h3>Sarthak Pandey</h3>
+                    <p>Data Analyst</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="organization">
+            <h2>About Our Organization</h2>
+            <p>We are committed to environmental sustainability through effective waste management and public participation.</p>
+        </section>
+    </div>
+
+</body>
+</html>

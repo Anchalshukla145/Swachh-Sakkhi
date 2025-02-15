@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - Swachh Sakhi</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(120deg, #1e1e1e, #444);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .site-header {
+            font-size: 36px;
+            font-weight: bold;
+            color: #Cd7f32;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(242, 169, 0, 0.7);
+        }
+        .leaderboard-container {
+            width: 70%;
+            margin: auto;
+            background: #333;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 20px rgba(255, 215, 0, 0.4);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #444;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #555;
+            font-size: 18px;
+        }
+        th {
+            background-color: #f2a900;
+            color: white;
+            text-transform: uppercase;
+        }
+        tbody tr:nth-child(1) { background-color: #000000; color: black; font-weight: bold; }
+        tbody tr:nth-child(2) { background-color: #ffd700; color: black; font-weight: bold; }
+        tbody tr:nth-child(3) { background-color: #c0c0c0; color: black; font-weight: bold; }
+        tbody tr:nth-child(4) { background-color: #Cd7f32; color: black; font-weight: bold; }
+        tr:nth-child(even) { background-color: #555; }
+        tr:hover { background-color: #666; transition: 0.3s; }
+    </style>
+</head>
+<body>
+
+    <h1 class="site-header">🏆 Swachh Sakhi Leaderboard 🏆</h1>
+
+    <div class="leaderboard-container">
+        <table id="leaderboard">
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const players = [
+            { name: "Aarav Sharma", score: 2200 },
+            { name: "Diya Patel", score: 2100 },
+            { name: "Rahul Verma", score: 2000 },
+            { name: "Sneha Iyer", score: 1800 },
+            { name: "Vikram Singh", score: 1700 },
+            { name: "Pooja Nair", score: 2300 },
+            { name: "Rohan Mehta", score: 2500 },
+            { name: "Ananya Reddy", score: 1400 },
+            { name: "Karan Malhotra", score: 1300 },
+            { name: "Ishita Joshi", score: 1200 }
+        ];
+
+        function updateLeaderboard() {
+            let table = document.getElementById("leaderboard");
+            table.innerHTML = `
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            `;
+
+            let userPoints = localStorage.getItem("ecoPoints") ? parseInt(localStorage.getItem("ecoPoints")) : 0;
+            let currentUser = { name: "You", score: userPoints };
+
+            let leaderboardUpdated = localStorage.getItem("leaderboardUpdated");
+            if (leaderboardUpdated === "true") {
+                players.push(currentUser);
+                players.sort((a, b) => b.score - a.score);
+                localStorage.setItem("leaderboardUpdated", "false");
+            }
+
+            for (let i = 0; i < players.length; i++) {
+                let row = table.insertRow(-1);
+                row.insertCell(0).innerText = i + 1;
+                row.insertCell(1).innerText = players[i].name;
+                row.insertCell(2).innerText = players[i].score;
+            }
+        }
+
+        window.onload = updateLeaderboard;
+    </script>
+
+</body>
+</html>

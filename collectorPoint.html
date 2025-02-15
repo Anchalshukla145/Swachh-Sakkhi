@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Garbage Collection Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .status {
+            background-color: #e0ffe0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .points {
+            background-color: #ffeb3b;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .tracker-btn {
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+        .tracker-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Garbage Collection Tracker</h1>
+
+        <div class="status">
+            <p><strong>Live Garbage Collection Status:</strong></p>
+            <p id="collection-status">Loading status...</p>
+        </div>
+
+        <div class="points">
+            
+            <button class="tracker-btn" onclick="reportGarbage()"><a href="GeoTag.html"> Report Garbage</a></button>
+           
+        </div>
+
+        <div>
+            <button class="tracker-btn" onclick="getLiveTracking()"><a href="track.html">Show Live Tracking</a></button>
+        </div>
+
+        <div id="map" style="height: 400px; margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        let userPoints = localStorage.getItem("userPoints") ? parseInt(localStorage.getItem("userPoints")) : 0;
+        document.getElementById("user-points").textContent = userPoints;
+
+        function getLiveTracking() {
+            document.getElementById("collection-status").innerHTML = "Next garbage collection in your area is in 2 hours. Stay ready!";
+            document.getElementById('map').innerHTML = "<p>Interactive Map (Simulated)</p>";
+        }
+
+        function reportGarbage() {
+    if (localStorage.getItem("imageUploaded") === "true") {
+        userPoints += 10;
+        updatePoints();
+        localStorage.removeItem("imageUploaded"); // Remove flag after awarding points
+        alert("Thank you for reporting garbage! You've earned 10 points.");
+    } else {
+        alert("Please upload a photo before claiming points.");
+    }
+}
+
+
+        function collectGarbage() {
+            userPoints += 2000;
+            updatePoints();
+            alert("Thank you for collecting garbage! You've earned 20 points.");
+        }
+
+        function updatePoints() {
+            localStorage.setItem("userPoints", userPoints);
+            document.getElementById("user-points").textContent = userPoints;
+        }
+    </script>
+
+</body>
+</html>
